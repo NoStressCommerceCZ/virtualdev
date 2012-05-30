@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="vagrant-simple-lamp-project">
+
+	<description>
+	The script create a vagrant package and provide facility to start and stop a VM.
+	</description>
+
+	<property name="vm.box" value="vagrant-simple-lamp" />
+	<property name="vagrant.bin" value="vagrant.bat" />
+	<property name="file.box" value="${vm.box}.box" />
+
+	<target name="vm-package">
+		<exec executable="${vagrant.bin}" failonerror="no" >
+			<arg line="box remove ${vm.box}" />
+		</exec>
+
+		<exec executable="${vagrant.bin}" failonerror="yes" >
+			<arg line="package --base ${vm.box} --vagrantfile ${basedir}/Vagrantfile --output ${basedir}/${file.box}" />
+		</exec>
+
+		<exec executable="${vagrant.bin}" failonerror="no" >
+			<arg line="box add ${vm.box} ${basedir}/${file.box}" />
+		</exec>
+
+		<delete file="${file.box}" failonerror="no" />
+	</target>
+
+	<target name="vm-up">
+		<mkdir dir="${basedir}/test_environment" />
+		<mkdir dir="${basedir}/test_environment/data" />
+		<mkdir dir="${basedir}/test_environment/puppet" />
+		<copy todir="${basedir}/test_environment/puppet">
+			<fileset dir="${basedir}/puppet" />
+		</copy>
+		<copy file="${basedir}/Vagrantfile" tofile="${basedir}/test_environment/Vagrantfile" />
+
+		<exec dir="${basedir}/test_environment" executable="${vagrant.bin}" >
+			<arg line="init ${vm.box}" />
+		</exec>
+
+		<exec dir="${basedir}/test_environment" executable="${vagrant.bin}" failonerror="yes">
+			<arg line="up" />
+		</exec>
+	</target>
+
+	<target name="vm-down">
+		<exec dir="${basedir}/test_environment" executable="${vagrant.bin}" failonerror="yes">
+			<arg line="halt" />
+		</exec>
+	</target>
+
+</project>
