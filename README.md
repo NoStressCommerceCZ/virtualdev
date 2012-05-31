@@ -1,10 +1,12 @@
-= Virtual Dev =
+# Virtual Dev
+TODO - add a description of project, the goal etc...
 
-Virtualized Magento development made easy
+## Virtualdev Boxes
+ * [Basic LAMP](basic-lamp/README.md)
 
-== Simple LAMP ==
+ 
+# Support
+Support is via google group 
+https://groups.google.com/forum/#!forum/virtualdev
 
-What we have
- * apt
- * zend server
- * mysql server
+Please post your question here!
