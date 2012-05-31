@@ -11,10 +11,18 @@ application on same platform which can be set really close to production environ
 You can run it on Windows, Linux and Mac OS. Isn't that great! It is. That's our goal!
 
 ## Source codes
+
 All source codes are hosted in guthub repository https://github.com/NoStressCommerceCZ/virtualdev. So do not hesitate to download or fork it. Any code line back is really appreciated.
 
 ## User and developer support
+
 In case you have any questions then give us the shout here https://groups.google.com/forum/#!forum/virtualdev
+
+## Technologies and tools behind the scene
+
+As virtualization we're rely on VirtualBox which is driven by Vagrant.
+All provision of services and basic configuration is driven by Puppet.
+And finally whole stack is running on latest version of Debian.
 
 Any of your feedback is welcome!
 
