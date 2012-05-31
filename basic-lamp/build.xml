@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="vagrant-simple-lamp-project">
+<project name="vagrant-virtualdev-basic-lamp-project">
 
 	<description>
 	The script create a vagrant package and provide facility to start and stop a VM.
+	<!-- FIXME - improve description -->
 	</description>
 
-	<property name="vm.box" value="vagrant-simple-lamp" />
+	<!-- FIXME - add short desc here -->
+	<property name="vm.box" value="virtualdev-basic-lamp" />
+	
+	<!-- FIXME - this is OS depends -->
 	<property name="vagrant.bin" value="vagrant.bat" />
+	
+	<!-- FIXME - add short desc here -->
 	<property name="file.box" value="${vm.box}.box" />
 
+	<!-- FIXME - add target desc here -->
 	<target name="vm-package">
 		<exec executable="${vagrant.bin}" failonerror="no" >
 			<arg line="box remove ${vm.box}" />
@@ -25,6 +32,7 @@
 		<delete file="${file.box}" failonerror="no" />
 	</target>
 
+	<!-- FIXME - add target desc here -->
 	<target name="vm-up">
 		<mkdir dir="${basedir}/test_environment" />
 		<mkdir dir="${basedir}/test_environment/data" />
@@ -43,6 +51,7 @@
 		</exec>
 	</target>
 
+	<!-- FIXME - add target desc here -->
 	<target name="vm-down">
 		<exec dir="${basedir}/test_environment" executable="${vagrant.bin}" failonerror="yes">
 			<arg line="halt" />
