@@ -10,6 +10,9 @@ any complex setting. You can distribute this setting across whole team so every 
 application on same platform which can be set really close to production environment.
 You can run it on Windows, Linux and Mac OS. Isn't that great! It is. That's our goal!
 
+## How to run it
+FIXME - add a desciption here!
+
 ## Source codes
 
 All source codes are hosted in guthub repository https://github.com/NoStressCommerceCZ/virtualdev. So do not hesitate to download or fork it. Any code line back is really appreciated.

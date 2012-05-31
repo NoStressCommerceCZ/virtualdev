@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="vagrant-virtualdev-basic-lamp-project">
+<project name="virtualdev-basic-box-project">
 
 	<description>
-	The script create a vagrant package and provide facility to start and stop a VM.
-	<!-- FIXME - improve description -->
+	The ant script allows you to start / stop VM box via script.
+	Easily you can open this script in Eclipse and run your desired VM anytime you need.
 	</description>
 
 	<!-- FIXME - add short desc here -->
-	<property name="vm.box" value="virtualdev-basic-lamp" />
+	<property name="vm.box" value="virtualdev-basic-box" />
 
 	<!-- FIXME - this is OS depends -->
 	<property name="vagrant.bin" value="vagrant.bat" />
@@ -15,47 +15,53 @@
 	<!-- FIXME - add short desc here -->
 	<property name="file.box" value="${vm.box}.box" />
 
-	<!-- FIXME - add target desc here -->
-	<target name="vm-package">
-		<exec executable="${vagrant.bin}" failonerror="no" >
-			<arg line="box remove ${vm.box}" />
-		</exec>
-
-		<exec executable="${vagrant.bin}" failonerror="yes" >
-			<arg line="package --base ${vm.box} --vagrantfile ${basedir}/Vagrantfile --output ${basedir}/${file.box}" />
-		</exec>
-
-		<exec executable="${vagrant.bin}" failonerror="no" >
-			<arg line="box add ${vm.box} ${basedir}/${file.box}" />
-		</exec>
-
-		<delete file="${file.box}" failonerror="no" />
-	</target>
+	<property name="vm.location" location="${basedir}/${vm.box}" />
 
 	<!-- FIXME - add target desc here -->
-	<target name="vm-up">
-		<mkdir dir="${basedir}/test_environment" />
-		<mkdir dir="${basedir}/test_environment/data" />
-		<mkdir dir="${basedir}/test_environment/puppet" />
-		<copy todir="${basedir}/test_environment/puppet">
+	<target name="vm-up" description="Starts VM with provisions, it installs all services">
+
+		<mkdir dir="${vm.location}" />
+		<mkdir dir="${vm.location}/data" />
+		<mkdir dir="${vm.location}/puppet" />
+		<copy todir="${vm.location}/puppet">
 			<fileset dir="${basedir}/puppet" />
 		</copy>
-		<copy file="${basedir}/Vagrantfile" tofile="${basedir}/test_environment/Vagrantfile" />
+		<copy file="${basedir}/Vagrantfile" tofile="${vm.location}/Vagrantfile" />
 
-		<exec dir="${basedir}/test_environment" executable="${vagrant.bin}" >
-			<arg line="init ${vm.box}" />
-		</exec>
-
-		<exec dir="${basedir}/test_environment" executable="${vagrant.bin}" failonerror="yes">
+		<exec dir="${vm.location}" executable="${vagrant.bin}" failonerror="yes">
 			<arg line="up" />
 		</exec>
+
 	</target>
 
 	<!-- FIXME - add target desc here -->
-	<target name="vm-down">
-		<exec dir="${basedir}/test_environment" executable="${vagrant.bin}" failonerror="yes">
+	<target name="vm-down" description="Stops running VM">
+		<exec dir="${vm.location}" executable="${vagrant.bin}" failonerror="yes">
 			<arg line="halt" />
 		</exec>
+
+		<delete includeemptydirs="true">
+			<fileset dir="${vm.location}/puppet" includes="**/*"/>
+		</delete>
+	</target>
+
+	<!-- FIXME - add target desc here -->
+	<target name="vm-destroy" description="Destroy VM">
+
+		<mkdir dir="${vm.location}/puppet" />
+		<copy todir="${vm.location}/puppet">
+			<fileset dir="${basedir}/puppet" />
+		</copy>
+		<copy file="${basedir}/Vagrantfile" tofile="${vm.location}/Vagrantfile" />
+
+		<exec dir="${vm.location}" executable="${vagrant.bin}" failonerror="yes">
+			<arg line="destroy --force" />
+		</exec>
+
+		<delete includeemptydirs="true">
+			<fileset dir="${vm.location}" includes="**/*"/>
+		</delete>
+
 	</target>
 
 </project>
