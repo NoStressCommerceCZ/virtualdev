@@ -12,12 +12,13 @@ class phpmyadmin_zendserver {
 
    package { "phpmyadmin-zend-server":
        ensure => "latest",
-       require => Class["zendserverce"]
+       require => Service["zend-server"]
    }
 
    file { "/usr/local/zend/etc/sites.d/http/__default__/0/phpmyadmin.conf":
       source => "puppet:///modules/phpmyadmin_zendserver/phpmyadmin.conf",
-      require => Package["phpmyadmin-zend-server"]
+#      require => Package["phpmyadmin-zend-server"],
+      notify  => Service["zend-server"]
    }
 
    file { "/usr/share/phpmyadmin/config.inc.php":
@@ -26,8 +27,8 @@ class phpmyadmin_zendserver {
       mode => 644
    }
 
-   exec { "/etc/init.d/zend-server restart":
-   		require => File["/usr/local/zend/etc/sites.d/http/__default__/0/phpmyadmin.conf"],
-   }
+   #exec { "/etc/init.d/zend-server restart":
+   #		require => File["/usr/local/zend/etc/sites.d/http/__default__/0/phpmyadmin.conf"],
+   #}
 
 }

@@ -12,4 +12,6 @@ node default {
 	include mysql
 	include phpmyadmin_zendserver
 
+	include www
+
 }

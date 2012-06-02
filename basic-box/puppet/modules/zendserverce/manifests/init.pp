@@ -54,5 +54,11 @@ class zendserverce {
 	include zendserverce_step2
 	include zendserverce_main
 
+	service { "zend-server":
+	    ensure  => "running",
+	    enable  => "true",
+	    require => Package["zend-server-ce-php-5.2"],
+	}
+
 }
 
