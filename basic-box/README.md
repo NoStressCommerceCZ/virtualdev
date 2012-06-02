@@ -1,19 +1,20 @@
-# Virtual Dev - Basic LAMP
+# Virtual Dev - Basic Box
 
-TODO - add here short description
+The basic box provides preinstalled Zend Server CE 5.2 and latest MySQL server.
+The box is build on Ubuntu Lucid 64bit.
 
-## What we have
- * apt
- * zend server
- * mysql server
- 
+List of packages in server
+
+ * Zend Server CE / php 5.2 (document root - http://127.0.0.1:8080, ZS Administration http://127.0.0.1:10081/)
+ * MySQL server (user: root, no password)
+ * PHPMyAdmin (http://127.0.0.1:8080/phpmyadmin/)
+
 ## Usage
 
 TODO - briefly describe an usage
- 
- 
+
 # Support
-Support is via google group 
+Support is via google group
 https://groups.google.com/forum/#!forum/virtualdev
 
 Please post your question here!
