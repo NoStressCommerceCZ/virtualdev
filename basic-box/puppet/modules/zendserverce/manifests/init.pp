@@ -1,12 +1,14 @@
-class apt_updates {
-  	# Run apt-get update when anything beneath /etc/apt/ changes
-	exec { "apt-get update":
-		command => "/usr/bin/apt-get update",
-		onlyif => "/bin/sh -c '[ ! -f /var/cache/apt/pkgcache.bin ] || /usr/bin/find /etc/apt/* -cnewer /var/cache/apt/pkgcache.bin | /bin/grep . > /dev/null'",
-	}
-}
+###############################################################################
+#
+# Zend Server CE 5.2 Puppet
+#
+# support: https://groups.google.com/forum/?fromgroups#!forum/virtualdev
+# @autor Jaromir Muller, jaromir[dot]muller[at]gmail[dot]com
+# @licence: OSL v3
+#
+###############################################################################
 
-class zendserverce {
+class zendserverce_step1 {
 
 	# https://github.com/puppetlabs/puppetlabs-stdlib
 	file_line { 'debian_package':
@@ -14,14 +16,43 @@ class zendserverce {
 	   	line => 'deb http://repos.zend.com/zend-server/deb server non-free'
 	}
 
-	exec { "wget http://repos.zend.com/zend.key -O- |apt-key add -":
-	    path => ["/usr/bin", "/usr/sbin"]
+	exec { "zend_key":
+		command => "wget http://repos.zend.com/zend.key -O- |apt-key add -",
+		path => ["/usr/bin", "/usr/sbin"]
   	}
 
-    package { "zend-server-ce-php-5.2":
-       require => class["apt_updates"],
+}
+
+class zendserverce_step2 {
+
+  	exec { "apt_update":
+		command => "/usr/bin/apt-get update"
+	}
+
+}
+
+class zendserverce_main {
+
+	package { "zend-server-ce-php-5.2":
        ensure => "latest"
    	}
+
+}
+
+class zendserverce {
+
+	stage { 'step1': before => Stage['step2'] }
+	stage { 'step2': before => Stage['main'] }
+
+	class{
+		"zendserverce_step1" : stage => 'step1';
+	    "zendserverce_step2" : stage => 'step2';
+	    "zendserverce_main"	 : stage => 'main';
+    }
+
+	include zendserverce_step1
+	include zendserverce_step2
+	include zendserverce_main
 
 }
 
