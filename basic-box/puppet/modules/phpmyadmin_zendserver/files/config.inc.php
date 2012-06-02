@@ -16,6 +16,7 @@ include('/etc/phpmyadmin/config.inc.php');
 // Set the default server if there is no defined
 if (!isset($cfg['Servers'])) {
     $cfg['Servers'][1]['host'] = '127.0.0.1';
+    $cfg['Servers'][1]['verbose'] = 'Virtual Dev - 127.0.0.1';
     $cfg['Servers'][1]['AllowNoPassword'] = true;
 }
 
