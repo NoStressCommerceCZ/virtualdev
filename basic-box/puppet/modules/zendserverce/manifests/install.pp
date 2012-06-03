@@ -29,7 +29,7 @@ class zendserverce::install($php_version="5.2") {
   	}
 
   	file { "/var/www/index.php":
-      source => "puppet:///modules/www/html/index.php",
+      source => "puppet:///modules/zendserverce/html/index.php",
       require => Package["zend-server-ce-php-$php_version"],
       replace => true
    	}

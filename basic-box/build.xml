@@ -64,24 +64,6 @@
 
 	</target>
 
-	<target name="vm-reload" description="Up and reload VM">
-
-		<mkdir dir="${vm.location}/puppet" />
-		<copy todir="${vm.location}/puppet">
-			<fileset dir="${basedir}/puppet" />
-		</copy>
-		<copy file="${basedir}/Vagrantfile" tofile="${vm.location}/Vagrantfile" />
-
-		<exec dir="${vm.location}" executable="${vagrant.bin}" failonerror="yes">
-			<arg line="up" />
-		</exec>
-
-		<exec dir="${vm.location}" executable="${vagrant.bin}" failonerror="yes">
-			<arg line="reload" />
-		</exec>
-
-	</target>
-
 	<target name="vm-provision">
 
 		<mkdir dir="${vm.location}/puppet" />

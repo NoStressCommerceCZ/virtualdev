@@ -8,10 +8,7 @@ List of packages in server
  * Zend Server CE / php 5.2 (document root - http://127.0.0.1:8080, ZS Administration http://127.0.0.1:10081/)
  * MySQL server (user: root, no password)
  * PHPMyAdmin (http://127.0.0.1:8080/phpmyadmin/)
-
-## Usage
-
-TODO - briefly describe an usage
+ * SSH Server, you can connect via 127.0.0.1, port 2222, user and password are 'vargant'
 
 # Support
 Support is via google group
