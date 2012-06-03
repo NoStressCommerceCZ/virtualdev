@@ -15,3 +15,6 @@ Support is via google group
 https://groups.google.com/forum/#!forum/virtualdev
 
 Please post your question here!
+
+# Documentation
+The latest documentation is hosted here http://docs.nostresscommerce.com:8090/display/virtualdev/Home
