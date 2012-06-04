@@ -22,7 +22,7 @@ All source codes are hosted in guthub repository https://github.com/NoStressComm
 In case you have any questions then give us the shout here https://groups.google.com/forum/#!forum/virtualdev
 
 ## Documentation
-The latest documentation is hosted here http://docs.nostresscommerce.com:8090/display/virtualdev/Home
+The latest documentation is hosted here http://docs.nostresscommerce.com/display/virtualdev/Home
 
 ## Technologies and tools behind the scene
 
